@@ -507,6 +507,17 @@
             } else {
               if (!(parseInt(this.tokenId) > 0 && parseInt(this.tokenId) < 10000)) {
                 alert("Please enter tokenId between 0 and 9,999 inclusive");
+              } else {
+                const provider = new ethers.providers.Web3Provider(window.ethereum);
+                const cryptoPunksData = new ethers.Contract(CRYPTOPUNKSDATAADDRESS, CRYPTOPUNKSDATAABI, provider);
+                console.log(new Date().toUTCString() + " Starting query");
+                const punkImage = await new cryptoPunksData.punkImage(this.tokenId);
+                console.log(new Date().toUTCString() + " punkImage: " + JSON.stringify(punkImage));
+                const punkImageSvg = await new cryptoPunksData.punkImageSvg(this.tokenId);
+                console.log(new Date().toUTCString() + " punkImageSvg: " + JSON.stringify(punkImageSvg));
+                const punkAttributes = await new cryptoPunksData.punkAttributes(this.tokenId);
+                console.log(new Date().toUTCString() + " punkAttributes: " + JSON.stringify(punkAttributes));
+
               }
             }
             // console.log(JSON.stringify(this.getCategories[tokenId]));
