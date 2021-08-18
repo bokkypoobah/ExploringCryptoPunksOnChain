@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+    <title>Exploring Etheria</title>
+
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap-vue.min.css"/>
+    <link type="text/css" rel="stylesheet" href="css/bootstrap-vue-icons.min.css"/>
+    <link type="text/css" rel="stylesheet" href="css/highlight.min.css"/>
+
+    <!-- Load polyfills to support older browsers -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es2015%2CIntersectionObserver"></script>
+
+    <script src="js/vue.js"></script>
+    <script src="js/bootstrap-vue.min.js"></script>
+    <script src="js/bootstrap-vue-icons.min.js"></script>
+    <script src="js/dexie.js"></script>
+    <script src="js/libgif.js"></script>
+
+    <script src="js/ethers-5.2.umd.min.js"></script>
+    <script src="js/highlight.min.js"></script>
+    <script src="bastardData.min.js"></script>
+    <script src="deploymentData.js"></script>
+
+    <link rel="apple-touch-icon" sizes="57x57" href="images/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="images/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="images/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="images/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="images/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="images/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="images/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="images/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+    <link rel="manifest" href="images/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="images/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+  </head>
+  <body>
+    <div id="app">
+      <b-container fluid class="m-0 p-2">
+        <div>
+          <b-navbar variant="light">
+            <b-navbar-brand to="./" variant="primary" v-b-popover.hover.bottom="'Exploring Etheria'">
+              Exploring Etheria
+            </b-navbar-brand>
+            <div v-for="item in getSelectedShowcase">
+              <b-link @click="addAsset(item)">
+                <b-avatar rounded="sm" variant="light" size="3.0rem" :src="getData[item].osimage" v-b-popover.hover.bottom="'#' + item" class="ml-2"></b-avatar>
+              </b-link>
+            </div>
+            <b-navbar-nav class="ml-auto">
+              <b-button size="sm" variant="outline-primary" class="ml-4" @click="connect();" v-if="!connected">CONNECT WALLET</b-button>
+              <b-button size="sm" variant="outline-primary" class="ml-4" @click="disconnect();" v-if="connected">DISCONNECT WALLET {{ account.substring(0, 10).toUpperCase() }}</b-button>
+            </b-navbar-nav>
+          </b-navbar>
+        </div>
+
+        <div>
+          <b-card no-body class="mt-1">
+
+            <!--
+            <div>
+              <b-modal ref="my-modal" hide-footer @shown="onGIFFrameSelectionModalOpened">
+                <template #modal-title>
+                  {{ selectedTokenId == null ? null : getData[selectedTokenId].name }}
+                  <span v-if="selectedItemIsGIF"> - Frame {{ selectedItemFrame == null ? '(loading)' : selectedItemFrame }}</span>
+                </template>
+                <div class="d-block text-center">
+                  <img id="thegif1" :src="selectedTokenId == null ? null : getData[selectedTokenId].osimage" :rel:animated_src="selectedTokenId == null ? null : getData[selectedTokenId].osimage" width="400" height="400" rel:auto_play="0" rel:rubbable="1" class="pr-3" />
+                </div>
+                <b-input-group v-if="selectedItemIsGIF">
+                  <template #prepend>
+                    <b-form-spinbutton wrap @change="setFrame()" v-model.trim="selectedItemFrame" min="0" :max="selectedItemFrames == null ? 0 : (selectedItemFrames - 1)" class="mr-2"></b-form-spinbutton>
+                    <b-input-group-text>0</b-input-group-text>
+                  </template>
+                  <b-form-input @change="setFrame()" v-model.trim="selectedItemFrame" type="range" min="0" :max="selectedItemFrames == null ? 0 : (selectedItemFrames - 1)" class="w-25"></b-form-input>
+                  <template #append>
+                    <b-input-group-text>{{ selectedItemFrames == null ? 0 : (selectedItemFrames - 1) }}</b-input-group-text>
+                  </template>
+                </b-input-group>
+              </b-modal>
+            </div>
+            -->
+
+            <b-tabs card v-model="tabIndex" align="right">
+
+              <b-tab title="Owners">
+                <b-card-text>
+                  CONNECT WALLET and wait while 33 x 33 web3 calls are retrieving the data. View your browser Developer Console for progress.
+                </b-card-text>
+                <b-card-text>
+                  <b-row v-for="(row, rowIndex) in owners.reverse()" v-bind:key="rowIndex" class="m-0 p-0">
+                    <b-col v-for="(col, colIndex) in row" v-bind:key="colIndex" class="m-0 p-0">
+                      <div v-if="col == '0x000001f568875F378Bf6d170B790967FE429C81A'">
+                        <b-btn variant="danger" :href="'https://etherscan.io/address/' + col" class="m-0 p-0">
+                          {{ col.replace('0x0000000000000000000000000000000000000000', '').substring(2, 6) }}
+                        </b-btn>
+                      </div>
+                      <div v-else>
+                        <b-link :href="'https://etherscan.io/address/' + col">
+                          {{ col.replace('0x0000000000000000000000000000000000000000', '').substring(2, 6) }}
+                        </b-link>
+                      </div>
+                    </b-col>
+                  </b-row>
+                </b-card-text>
+              </b-tab>
+
+              <!--
+              <b-tab title="SEXY BASTARDS">
+                <b-card-text>
+                  <div class="d-flex m-0 p-0" style="height: 37px;">
+                    <div>
+                      <b-form-input type="text" size="sm" v-model.trim="searchString" debounce="600" placeholder="SEARCH..." v-b-popover.hover="'SEARCH BY TOKENID OR WORD IN LYRICS'"></b-form-input>
+                    </div>
+                    <div class="pl-2">
+                      <b-button v-b-toggle.collapse-search size="sm" variant="none"><b-button size="sm" variant="link" class="m-0 p-0" v-b-popover.hover="'ADVANCED SERACH'" ><b-icon-filter shift-v="+1" font-scale="1.7"></b-icon-filter></b-button></b-button>
+                    </div>
+                    <div class="pl-2">
+                      <b-button size="sm" :pressed.sync="displayOwned" variant="outline-primary">MY SEXY BASTARDS</b-button>
+                    </div>
+                    <div class="pr-1 flex-grow-1">
+                    </div>
+                    <div class="pl-2">
+                      <font size="-2">{{ getSearchResultsRows }}/{{ getTotalSupply }}</font>
+                    </div>
+                    <div class="pl-2">
+                      <b-pagination size="sm" v-model="searchCurrentPage" :total-rows="getSearchResultsRows" :per-page="searchPerPage"></b-pagination>
+                    </div>
+                    <div class="pl-2">
+                      <b-form-select size="sm" v-model="searchPerPage" :options="searchPerPageOptions"></b-form-select>
+                    </div>
+                    <div class="pl-2">
+                      <b-form-select size="sm" v-model="view" :options="viewOptions"></b-form-select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <b-collapse id="collapse-search" class="m-2">
+                      <b-card>
+                        <b-row v-for="categoryKey in Object.keys(getCategories).sort()">
+                          <b-col> {{ categoryKey }}</b-col>
+                          <b-col>
+                            <b-row v-for="valuesKey in getSortedValuesForCategory(categoryKey)">
+                              {{ valuesKey }} : {{ getCategories[categoryKey] }}
+                            </b-row>
+                          </b-col>
+                        </b-row>
+                      </b-card>
+                    </b-collapse>
+                  </div>
+
+                  <div v-if="view == 'cards'">
+                    <b-card-group deck>
+                      <div v-for="record in getSearchResultsPage">
+                        <b-card body-class="p-1" header-class="p-1" footer-class="p-1" img-top class="m-1 p-0">
+                          <template #header>
+                            <span variant="secondary" class="small truncate">
+                              {{ '#' + record.tokenId }}
+                            </span>
+                          </template>
+                          <b-link @click="addAsset(record.tokenId)" v-b-popover.hover="'Click for details'">
+                            <b-img-lazy width="220%" :src="record.osimage" />
+                          </b-link>
+                        </b-card>
+                      </div>
+                    </b-card-group>
+                  </div>
+                  <div v-if="view == 'list'">
+                    <b-table small :fields="fields" :items="getSearchResultsPage" responsive="sm">
+                      <template #cell(tokenId)="data">
+                        <b-link :href="data.item.permalink + '?ref=0x000001f568875F378Bf6d170B790967FE429C81A'" v-b-popover.hover="'View on OpenSea.io'" target="_blank">
+                          {{ data.item.tokenId }}
+                        </b-link>
+                        <div v-if="data.item.mosaicurl != null">
+                          <b-link :href="data.item.mosaicurl" v-b-popover.hover="'View HYPED AF (ANIMATED) mosaic'" target="_blank">
+                            mosaic
+                          </b-link>
+                        </div>
+                      </template>
+                      <template #cell(image)="data">
+                        <b-link @click="addAsset(data.item.tokenId)" v-b-popover.hover="'Click for details'">
+                          <b-img-lazy width="200%" :src="data.item.osimage" />
+                        </b-link>
+                      </template>
+                      <template #cell(description)="data">
+                        <span v-for="line in data.item.description.split('\n')">
+                          <b>{{ line }}</b><br />
+                        </span>
+                      </template>
+                      <template #cell(attributes)="data">
+                        <b-row v-for="attribute in data.item.attributes"  v-bind:key="attribute.trait_type" class="m-0 p-0">
+                          <b-col class="m-0 p-0"><font size="-3">{{ attribute.trait_type }}</font></b-col><b-col class="m-0 p-0"><b><font size="-2">{{ attribute.value }}</font></b></font></b-col>
+                        </b-row>
+                      </template>
+                    </b-table>
+                  </div>
+                </b-card-text>
+              </b-tab>
+              -->
+
+              <!--
+              <b-tab title="MY FUCKING WALLET">
+                <b-card-text>
+                  SELECT <em>MY SEXY BASTARDS</em> IN THE PREVIOUS TAB TO VIEW YOUR BASTARDS.<br />
+                  <b-table small :fields="ownedTokenFields" :items="getOwnedTokenIdData" responsive="sm">
+                  </b-table>
+                </b-card-text>
+              </b-tab>
+              -->
+
+              <!--
+              <b-tab title="INFO">
+                <h6 class="mb-1">WHAT IS THIS WEBSHITE ABOUT?</h6>
+                <b-card-text>
+                  A SMOL WEB3 APP TO VIEW YOUR BASTARD GAN PUNKS FROM <a href="https://www.bastardganpunks.club/" target="_blank">https://www.bastardganpunks.club/</a>. OPEN SAUCED CODE IS AVAILBLE FOR YOUR TO IMPROVE ON - SEE BELOW.
+
+                  THIS SITE CURRENTLY LISTS BGANPUNKV2 (VERSION 2) NFTS, NOT BGANPUNKV1 (VERSION 1) <a href="https://bganpunks.eth.link/" target="_blank">https://bganpunks.eth.link/</a>.
+                </b-card-text>
+
+                <b-card-text>
+                  WER ARE NOT AFFILIATED WITH <a href="https://twitter.com/bganpunks" target="_blank">THESE BASTARDS</a> WITH A SANDWICH LOGO. IF YOU HAVE QUESTIONS, HEAD OVER TO THEIR DISCORD, LINEKD FROM THE URLS ABOVE.
+                  <b-card no-body img-src="images/Twitter_bganpunks.png" style="max-width: 20rem;" class="mt-1 ml-2"></b-card>
+                </b-card-text>
+
+                <b-card-text>
+                  NFT AND IMAGE COPYRIGHT INFO SEE <a href="https://www.bastardganpunks.club/#nftownership" target="_blank">https://www.bastardganpunks.club/#nftownership</a>.
+
+                  A COPY OF THE <a href="https://drive.google.com/drive/folders/1dLnTSUhDlgfdUlzwm1pamiAWUyGVOGj-" target="_blank">HYPED AF MOSAICS</a> HAS BEEN INCLUDED WITH THIS WEBSHITE TO ORGANISE FOR EASIER ACCESS. ONLY THE HYPED AF (ANIMATED) MOSAICS IN THE FIRST 9,000 (#0 to #8,999) TOKENS HAVE BEEN ORGANISED AND THIS REPOSITORY WILL HAVE TO BE UPDATED WHEN THE ORGANISED MOSAICS ARE FINALLY PUBLISHED.
+                </b-card-text>
+
+                <h6 class="mt-4 mb-1">HOW DO I ADOPT SOME BASTARDS?</h6>
+                <b-card-text>
+                  THE LAST BASTARD WAS MINTED (SEE BELOW) AT <a href="https://etherscan.io/tx/0x8540f856b6db0eab792fda749730865a10178260da06541c84cf585d8dc60592" target="_blank">Jun-25-2021 04:53:13 PM +UTC</a> THROUGH A PROXY CONTRACT AND THERE ARE NO MORE BASTARDS TO ADOPT.
+
+                  BGANPUNKV2 NFTS CAN BE PURCHASED FROM SECONDARY ERC-721 MARKETS SUCH AS <a href="https://opensea.io/collection/bastard-gan-punks-v2" target="_blank">https://opensea.io/collection/bastard-gan-punks-v2</a>.
+
+                  SEE ALSO <a href="https://allbastards.com/" target="_blank">https://allbastards.com/</a> and <a href="https://nftexp.io/explore/bastard-gan-punks-v2" target="_blank">https://nftexp.io/explore/bastard-gan-punks-v2</a> FOR MORE INFROMATION.
+
+                  THIS IS NOT FINANCIAL ADVICE. DO YOUR OWN FUCKING RESEARCH.
+                </b-card-text>
+
+                <h6 class="mt-4 mb-1">CONTRACT DETAILS</h6>
+                <b-card-text>
+                  THE BGANPUNV2 NFT SMART CONTRACT AT <a href="https://etherscan.io/address/0x31385d3520bCED94f77AaE104b406994D8F2168C#code" target="_blank">0x31385d3520bCED94f77AaE104b406994D8F2168C</a>:
+                  <ul>
+                    <li>WAS DEPLOYED AT <a href="https://etherscan.io/tx/0xd875fb294bf841eaf7bffae94bd5488d78f227e9b4a3017105bae31b296419ce" target="_blank">Mar-07-2021 12:03:56 PM +UTC</a> WHERE TOKENS #0 TO 33 WERE MINTED</li>
+                    <li>MINTED THE FINAL TOKEN #11,304 AT <a href="https://etherscan.io/tx/0x8540f856b6db0eab792fda749730865a10178260da06541c84cf585d8dc60592" target="_blank">Jun-25-2021 04:53:13 PM +UTC</a> THROUGH A PROXY CONTRACT WITH A DECLINING PRICE</li>
+                  </ul>
+                  <b-card img-src="images/EtherScan_BGANPUNKSV2_20210703_2211.png" style="max-width: 40rem;" class="ml-5">
+                    <b-card-text>
+                      ETHERSCAN'S <a href="https://etherscan.io/token/tokenholderchart/0x31385d3520bced94f77aae104b406994d8f2168c" target="_blank">BASTARD GAN PUNKS V2 TOKEN HOLDERS @ Jul 3 2021</a>
+                    </b-card-text>
+                  </b-card>
+                </b-card-text>
+
+                <h6 class="mt-4 mb-1">ABOUT THIS APP</h6>
+                <b-card-text>
+                  <ul>
+                    <li>SOURCE CODE AVAILABLE AT <a href="https://github.com/bokkypoobah/BestBastardGANPunks" target="_blank">https://github.com/bokkypoobah/BestBastardGANPunks</a>. CLONE IT, FORK IT. CONTRIBUTE ANY USEFUL CHANGES BACK TO THIS MAIN REPOSITORY</li>
+                    <li>WRITTEN USING THE <a href="https://bootstrap-vue.org/" target="_blank">https://bootstrap-vue.org/</a> FRAMEWWORK</li>
+                    <li>GENERATES "STATIC" DATA BY COLLATING INFOTMSTION FROM THE TOKEN CONTACT'S <em>tokenURI(...)</em> INFORMATION WITH THE INFOTRMATION FROM OPENSEA.IO.</li>
+                    <li>USES <a href="https://github.com/ethers-io/ethers.js/" target="_blank">ETHERS.JS</a> TO CONNECT TO ETHERUEM VIA WEB3 TO RETRIEVE NFT TOKENS OWNED</li>
+                    <li>HAS NO TRACKIING TECHNOLOGY. HOWEVER CONNECTIONS FROM THIS APP TO OPENSEA AND YOUR WEB3 PROVIDER WILL LEAK SOME INFORMATION.</li>
+                    <li>CAN BE RUN ON YOUR OWN COMPUTER BY CLONING THE GITHUB REPOSITORY AND SERVING THE PAGES USING A WEBSERVER, OR THE "ANYWHERE" SERVER.</li>
+                    <li>CAN BE RUN FROM GITHUB PAGES, SO YOU CAN EASILY CLONE, CUSTOMISE AND SERVE YOUR OWN VERSION</li>
+                    <li>THIS APP DOES ADD A REF LINK TO MY ACCOUNT TO OPENSEA URLS</li>
+                  </ul>
+                </b-card-text>
+
+                <h6 class="mt-4 mb-1">SUPPORT A POOR DEVLOPER BASTARD</h6>
+                <b-card-text>
+                  <ul>
+                    <li>SEND YOUR FUCKING DONATIONS TO BokkyPooBah.eth. ETH, ERC20S, AND NFTS ALL ACCEPTECD. DON'T BE A FUCKING STINGY BASTARD!!!</li>
+                  </ul>
+                </b-card-text>
+
+                <b-card-text class="mt-5">
+                  ENJOY!
+                  <b-card no-body img-src="images/DoomedDegen.png" style="max-width: 20rem;" class="mt-1 ml-2"></b-card>
+                  (C) BOKKYPOOBAH / BOK CONSULTING PTY LTD 2021. THE MIT LICENCE.
+                </b-card-text>
+              </b-tab>
+              -->
+            </b-tabs>
+          </b-card>
+        </div>
+      </b-container>
+    </div>
+
+    <script>
+      window.app = new Vue({
+        el: '#app',
+        data: {
+          connected: false,
+          account: null,
+          owners: [],
+          status: [],
+          tokensOwned: [],
+          tabIndex: 0,
+          abortSearch: false,
+          searchString: '',
+          advancedSearch: false,
+          searchCurrentPage: 1,
+          searchPerPage: 73,
+          searchPerPageOptions: [
+            { value: 3, text: '3/P' },
+            { value: 73, text: '73/P' },
+            { value: 666, text: '666/P' },
+            { value: 2145, text: '2,145/P' },
+            { value: 66666, text: 'ALL' },
+          ],
+          displayOwned: false,
+
+          selectedTokenId: null,
+          selectedItemFrame: 0,
+          selectedItemFrames: null,
+          selectedItemIsGIF: false,
+          selectedItemGIF: null,
+
+          view: 'list',
+          viewOptions: [
+            { value: 'cards', text: 'CARDS' },
+            { value: 'list', text: 'LIST' },
+          ],
+          fields: [
+            { key: 'tokenId', label: 'TOKENID' },
+            { key: 'image', label: 'BASTARD' },
+            { key: 'description', label: 'LYRICS' },
+            { key: 'attributes', label: 'ATTRIBUTES' },
+          ],
+          ownedTokenFields: [
+            { key: 'i', label: '#' },
+            { key: 'tokenId', label: 'TOKENID' },
+          ],
+          bokkysBastards: [3053, 7222, 7567, 9738, 10375, 10456, 10564, 10729, 10731, 10734, 10735, 10738, 10739, 10834, 11106],
+        },
+        computed: {
+          getData() {
+            const results = [];
+            for (let i in BASTARDDATA) {
+              const item = BASTARDDATA[i];
+              item.mosaicurl = null;
+              for (let k in item.attributes) {
+                const attribute = item.attributes[k];
+                if (attribute.trait_type == 'HYPE TYPE') {
+                  if (attribute.value == 'HYPED AF (ANIMATED)') {
+                    if (item.tokenId < 9000) {
+                      item.mosaicurl = "hypedafmosaic/" + item.tokenId + ".png";
+                    }
+                  }
+                }
+              }
+              item.owned = this.tokensOwned[i] || false;
+              results.push(item);
+            }
+            return results;
+          },
+          getCategories() {
+            let results = [];
+            const collater = {};
+            for (let i in BASTARDDATA) {
+              const item = BASTARDDATA[i];
+              for (let k in item.attributes) {
+                const attribute = item.attributes[k];
+                const traitType = attribute.trait_type;
+                const value = attribute.value;
+                if (!collater[traitType]) {
+                  collater[traitType] = {};
+                }
+                if (!collater[traitType][value]) {
+                  collater[traitType][value] = 1;
+                } else {
+                  collater[traitType][value] = collater[traitType][value] + 1;
+                }
+              }
+            }
+            // console.log(JSON.stringify(collater, null, 2));
+            // const sortedCategories = Object.keys(collater).sort();
+            // for (let i in sortedCategories) {
+            //   const category = sortedCategories[i];
+            //   console.log("Category: " + category);
+            //   const sortedValues = Object.keys(sortedCategories[i]).sort();
+            //   console.log("sortedValues: " + sortedValues);
+            //   const values = [];
+            //   for (let j in sortedValues) {
+            //     const value = sortedValues[j];
+            //     console.log("  value: " + value);
+            //     values.push(value);
+            //   }
+            //   results.push({ category: category, values: values });
+            // }
+
+            return collater;
+          },
+          getTotalSupply() {
+            return BASTARDDATA.length;
+          },
+          getSearchResults() {
+            let results = [];
+            for (let i in this.getData) {
+              const d = this.getData[i];
+              let include = true;
+              if (this.displayOwned) {
+                include = d.owned;
+              }
+
+              function hasAttribute(data, searchString) {
+                for (let attributeIndex in data.attributes) {
+                  const attribute = data.attributes[attributeIndex];
+                  if (('' + attribute.value).toLowerCase().includes(searchString)) {
+                    return true;
+                  }
+                }
+                return false;
+              }
+
+              if (this.searchString != null && this.searchString.length > 0) {
+                const s = this.searchString.toLowerCase();
+
+                // const hasAttr = hasAttribute(d, s);
+
+                if (d.tokenId == this.searchString || (d.description && d.description.toLowerCase().includes(s)) /*|| hasAttribute(d, s) */) {
+                } else {
+                  include = false;
+                }
+              }
+              if (include) {
+                results.push(d);
+              }
+            }
+            return results;
+          },
+          getSearchResultsPage() {
+            const currentPage = this.searchCurrentPage;
+            const perPage = this.searchPerPage;
+            return this.getSearchResults.slice((currentPage - 1) * perPage, currentPage * perPage);
+          },
+          getSearchResultsRows() {
+            return this.getSearchResults.length;
+          },
+          getOwnedTokenIdData() {
+            var results = [];
+            let i = 0;
+            for (let tokenId in this.tokensOwned) {
+              results.push({ i: ++i, tokenId: tokenId, name: this.tokensOwned[tokenId] })
+            }
+            return results;
+          },
+          getSelectedShowcase() {
+            const MAXBASTARDS = 14;
+            function shuffleArray(array) {
+              for (var i = array.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+              }
+            }
+            let newArray = Object.keys(this.tokensOwned);
+            if (!this.connected || newArray.length == 0) {
+              newArray = this.bokkysBastards.slice(0);
+            }
+            shuffleArray(newArray);
+            return newArray.slice(0, MAXBASTARDS);
+          }
+        },
+        methods: {
+          getSortedValuesForCategory(category) {
+            console.log(" --- " + category + " ---");
+            console.log(JSON.stringify(this.getCategories[category]));
+            return this.getCategories[category];
+          },
+          async connect() {
+            if (!window.ethereum) {
+              alert("Please use the https://metamask.io addon with Firefox, Chromium, Opera or Chrome, or any other other web3 browser, if you would like to view your Ethereum wallet's Boring Bananas.");
+              this.connected = false;
+              this.account = null;
+            } else {
+              if (!window.ethereum.isConnected() || !window.ethereum['isUnlocked']) {
+                try {
+                  const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                  this.account = accounts[0];
+                } catch (e) {
+                  console.log("connect(): Error connecting");
+                }
+              }
+              const provider = new ethers.providers.Web3Provider(window.ethereum);
+              const network = await provider.getNetwork();
+              if (network.chainId == 1) {
+                this.connected = true;
+
+                // const owners = [];
+                const etheriaHelper = new ethers.Contract(ETHERIAHELPERADDRESS, ETHERIAHELPERABI, provider);
+                console.log(new Date().toUTCString() + " Strating query");
+                const owners = await new etheriaHelper.owners();
+                console.log(new Date().toUTCString() + " owners: " + JSON.stringify(owners).substring(0, 100));
+                const names = await new etheriaHelper.names();
+                console.log(new Date().toUTCString() + " names: " + JSON.stringify(names).substring(0, 100));
+                const statuses = await new etheriaHelper.statuses();
+                console.log(new Date().toUTCString() + " statuses: " + JSON.stringify(statuses).substring(0, 100));
+                const lastFarms = await new etheriaHelper.lastFarms();
+                console.log(new Date().toUTCString() + " lastFarms: " + JSON.stringify(lastFarms).substring(0, 100));
+
+                // const etheria = new ethers.Contract(ETHERIAADDRESS, ETHERIAABI, provider);
+                // const locked = await new etheria.getLocked();
+                // console.log("locked: " + locked);
+
+                if (false) {
+                  for (let x = 0; x < 33; x++) {
+                    const row = [];
+                    for (let y = 0; y < 33; y++) {
+                      const owner = await new etheria.getOwner(x, y);
+                      row.push(owner);
+                      console.log("x: " + x + ", y: " + y + " => " + owner);
+                    }
+                    owners.push(row);
+                  }
+                  this.owners = owners;
+                  localStorage.setItem('etheriaOwners', JSON.stringify(owners));
+                }
+
+
+
+                //
+                //
+                // const banana = new ethers.Contract(BASTARDADDRESS, BASTARDABI, provider);
+                // const tokensOfOwner = await banana.tokensOfOwner(this.account);
+                // const tokensOwned = {};
+                // for (let i in tokensOfOwner) {
+                //   let t = tokensOfOwner[i];
+                //   tokensOwned[t.toString()] = true;
+                // }
+                // this.tokensOwned = tokensOwned;
+                // // console.log("bastardsOwned: " + JSON.stringify(tokensOwned, null, 2));
+                // localStorage.setItem('bastardsOwned', JSON.stringify(tokensOwned));
+              } else {
+                alert("Please switch to the Ethereum mainnet and refresh");
+              }
+            }
+          },
+          disconnect() {
+            this.connected = false;
+          },
+          async addAsset(tokenId) {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', this.getData[tokenId].osimage);
+            const t = this;
+            xhr.onload = function() {
+              if (xhr.response.substring(0, 3) == "GIF") {
+                t.selectedItemIsGIF = true;
+              } else {
+                t.selectedItemIsGIF = false;
+              }
+              t.selectedTokenId = tokenId;
+              t.$refs['my-modal'].show();
+            }
+            xhr.onerror = function() {
+              alert('A network error occurred!');
+            };
+            xhr.send();
+          },
+          async onGIFFrameSelectionModalOpened() {
+            const t = this;
+            var element = document.getElementById("thegif1")
+            if (t.selectedItemIsGIF) {
+              this.selectedItemGIF = new SuperGif({ gif: element, loop_delay: 2000, max_width: 400, rubbable: true } );
+              this.selectedItemGIF.load(function(){
+                t.selectedItemFrames = t.selectedItemGIF.get_length();
+                if (t.selectedItemFrame < 0 || t.selectedItemFrame >= t.selectedItemFrames) {
+                  t.selectedItemFrame = 0;
+                }
+                t.selectedItemGIF.move_to(t.selectedItemFrame);
+              });
+            }
+          },
+          setFrame() {
+            if (this.selectedItemGIF) {
+              this.selectedItemGIF.move_to(this.selectedItemFrame);
+            }
+          },
+        },
+        mounted() {
+          if (localStorage.getItem('bastardsOwned')) {
+            this.tokensOwned = JSON.parse(localStorage.getItem('bastardsOwned'));
+          }
+          if (localStorage.getItem('etheriaOwners')) {
+            this.owners = JSON.parse(localStorage.getItem('etheriaOwners'));
+          }
+
+          // console.log("mounted: bastardsOwned: " + JSON.stringify(this.tokensOwned, null, 2));
+          // hljs.highlightAll();
+        }
+      })
+    </script>
+  </body>
+</html>
