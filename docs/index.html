@@ -94,11 +94,17 @@
 
             <b-tabs card v-model="tabIndex" align="right">
 
-              <b-tab title="Owners">
+              <b-tab title="Main Page">
                 <b-card-text>
-                  CONNECT WALLET and wait while 33 x 33 web3 calls are retrieving the data. View your browser Developer Console for progress.
+                  CONNECT WALLET and wait while some web3 calls retrieve the data. View your browser Developer Console for progress.
                 </b-card-text>
                 <b-card-text>
+                  CryptoPunksMarket: <a :href="'https://etherscan.io/address/'  + getCryptoPunksMarketAddress + '#code'" target="_blank">{{ getCryptoPunksMarketAddress }}</a>
+                  <br />
+                  CryptoPunksData: <a :href="'https://etherscan.io/address/'  + getCryptoPunksDataAddress + '#code'" target="_blank">{{ getCryptoPunksDataAddress }}</a>
+
+                </b-card-text>
+                <!-- <b-card-text>
                   <b-row v-for="(row, rowIndex) in owners.reverse()" v-bind:key="rowIndex" class="m-0 p-0">
                     <b-col v-for="(col, colIndex) in row" v-bind:key="colIndex" class="m-0 p-0">
                       <div v-if="col == '0x000001f568875F378Bf6d170B790967FE429C81A'">
@@ -113,7 +119,7 @@
                       </div>
                     </b-col>
                   </b-row>
-                </b-card-text>
+                </b-card-text> -->
               </b-tab>
 
               <!--
@@ -346,6 +352,12 @@
           bokkysBastards: [471, 1133, 1147, 1197, 1322, 1406, 1822, 1835, 2289, 2893, 3053, 3291, 3316, 3569, 3852, 3905, 3906, 4046, 4087, 4113, 4158, 4209, 4272, 4618, 4777, 4793, 4994, 5288, 5601, 5654, 5710, 5775, 5903, 6225, 6285, 6626, 6632, 7008, 7214, 7222, 7266, 7432, 7492, 7567, 7721, 7731, 7776, 7831, 7850, 8621, 8645, 8854, 8895, 9040, 9158, 9260, 9362, 9374, 9401, 9490, 9594, 9595, 9740, 9759, 9783, 9792, 9881, 10050, 10093, 10178, 10192, 10193, 10252, 10341, 10375, 10449, 10456, 10564, 10583, 10592, 10661, 10724, 10727, 10729, 10734, 10735, 10736, 10737, 10834, 11100, 11105, 11140, 11258],
         },
         computed: {
+          getCryptoPunksMarketAddress() {
+            return CRYPTOPUNKSMARKETADDRESS;
+          },
+          getCryptoPunksDataAddress() {
+            return CRYPTOPUNKSDATAADDRESS;
+          },
           getData() {
             const results = [];
             for (let i in BASTARDDATA) {
