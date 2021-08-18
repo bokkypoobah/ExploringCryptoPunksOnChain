@@ -110,6 +110,18 @@
                   <b-card-text>
                     <b-form-input type="text" size="sm" @change="retrieveData('tokenId')" v-model.trim="tokenId" debounce="600" placeholder="🔍 ID1" class="mb-2"></b-form-input>
                   </b-card-text>
+                  <b-card-text>
+                    punkAttributes: {{ punkAttributes }}
+                  </b-card-text>
+                  <b-card-text v-if="punkImageSvg != null">
+                    <b-img width="220%" :src="punkImageSvg" />
+                  </b-card-text>
+                  <b-card-text>
+                    punkImageSvg: {{ punkImageSvg }}
+                  </b-card-text>
+                  <b-card-text>
+                    punkImage: {{ punkImage }}
+                  </b-card-text>
                 </b-card>
 
                 <!-- <b-card-text>
@@ -320,6 +332,9 @@
           account: null,
 
           tokenId: null,
+          punkImage: null,
+          punkImageSvg: null,
+          punkAttributes: null,
 
           owners: [],
           status: [],
@@ -500,24 +515,29 @@
         },
         methods: {
           async retrieveData(source) {
-            this.connected = true;
+            // this.connected = true;
             console.log(" --- retrieveData(" + source + ") ---");
             if (!this.connected) {
               alert("Please click CONNECT WALLET on the top right first");
+              this.punkImage = null;
+              this.punkImageSvg = null;
+              this.punkAttributes = null;
             } else {
               if (!(parseInt(this.tokenId) > 0 && parseInt(this.tokenId) < 10000)) {
                 alert("Please enter tokenId between 0 and 9,999 inclusive");
+                this.punkImage = null;
+                this.punkImageSvg = null;
+                this.punkAttributes = null;
               } else {
                 const provider = new ethers.providers.Web3Provider(window.ethereum);
                 const cryptoPunksData = new ethers.Contract(CRYPTOPUNKSDATAADDRESS, CRYPTOPUNKSDATAABI, provider);
                 console.log(new Date().toUTCString() + " Starting query");
-                const punkImage = await new cryptoPunksData.punkImage(this.tokenId);
-                console.log(new Date().toUTCString() + " punkImage: " + JSON.stringify(punkImage));
-                const punkImageSvg = await new cryptoPunksData.punkImageSvg(this.tokenId);
-                console.log(new Date().toUTCString() + " punkImageSvg: " + JSON.stringify(punkImageSvg));
-                const punkAttributes = await new cryptoPunksData.punkAttributes(this.tokenId);
-                console.log(new Date().toUTCString() + " punkAttributes: " + JSON.stringify(punkAttributes));
-
+                this.punkImage = await new cryptoPunksData.punkImage(this.tokenId);
+                console.log(new Date().toUTCString() + " punkImage: " + JSON.stringify(this.punkImage));
+                this.punkImageSvg = await new cryptoPunksData.punkImageSvg(this.tokenId);
+                console.log(new Date().toUTCString() + " punkImageSvg: " + JSON.stringify(this.punkImageSvg));
+                this.punkAttributes = await new cryptoPunksData.punkAttributes(this.tokenId);
+                console.log(new Date().toUTCString() + " punkAttributes: " + JSON.stringify(this.punkAttributes));
               }
             }
             // console.log(JSON.stringify(this.getCategories[tokenId]));
@@ -547,35 +567,35 @@
               if (network.chainId == 1) {
                 this.connected = true;
 
-                // const owners = [];
-                const etheriaHelper = new ethers.Contract(ETHERIAHELPERADDRESS, ETHERIAHELPERABI, provider);
-                console.log(new Date().toUTCString() + " Strating query");
-                const owners = await new etheriaHelper.owners();
-                console.log(new Date().toUTCString() + " owners: " + JSON.stringify(owners).substring(0, 100));
-                const names = await new etheriaHelper.names();
-                console.log(new Date().toUTCString() + " names: " + JSON.stringify(names).substring(0, 100));
-                const statuses = await new etheriaHelper.statuses();
-                console.log(new Date().toUTCString() + " statuses: " + JSON.stringify(statuses).substring(0, 100));
-                const lastFarms = await new etheriaHelper.lastFarms();
-                console.log(new Date().toUTCString() + " lastFarms: " + JSON.stringify(lastFarms).substring(0, 100));
+                // // const owners = [];
+                // const etheriaHelper = new ethers.Contract(ETHERIAHELPERADDRESS, ETHERIAHELPERABI, provider);
+                // console.log(new Date().toUTCString() + " Strating query");
+                // const owners = await new etheriaHelper.owners();
+                // console.log(new Date().toUTCString() + " owners: " + JSON.stringify(owners).substring(0, 100));
+                // const names = await new etheriaHelper.names();
+                // console.log(new Date().toUTCString() + " names: " + JSON.stringify(names).substring(0, 100));
+                // const statuses = await new etheriaHelper.statuses();
+                // console.log(new Date().toUTCString() + " statuses: " + JSON.stringify(statuses).substring(0, 100));
+                // const lastFarms = await new etheriaHelper.lastFarms();
+                // console.log(new Date().toUTCString() + " lastFarms: " + JSON.stringify(lastFarms).substring(0, 100));
 
                 // const etheria = new ethers.Contract(ETHERIAADDRESS, ETHERIAABI, provider);
                 // const locked = await new etheria.getLocked();
                 // console.log("locked: " + locked);
 
-                if (false) {
-                  for (let x = 0; x < 33; x++) {
-                    const row = [];
-                    for (let y = 0; y < 33; y++) {
-                      const owner = await new etheria.getOwner(x, y);
-                      row.push(owner);
-                      console.log("x: " + x + ", y: " + y + " => " + owner);
-                    }
-                    owners.push(row);
-                  }
-                  this.owners = owners;
-                  localStorage.setItem('etheriaOwners', JSON.stringify(owners));
-                }
+                // if (false) {
+                //   for (let x = 0; x < 33; x++) {
+                //     const row = [];
+                //     for (let y = 0; y < 33; y++) {
+                //       const owner = await new etheria.getOwner(x, y);
+                //       row.push(owner);
+                //       console.log("x: " + x + ", y: " + y + " => " + owner);
+                //     }
+                //     owners.push(row);
+                //   }
+                //   this.owners = owners;
+                //   localStorage.setItem('etheriaOwners', JSON.stringify(owners));
+                // }
 
 
 
