@@ -60,7 +60,7 @@
             </div>
             <b-navbar-nav class="ml-auto">
               <b-button size="sm" variant="outline-primary" class="ml-4" @click="connect();" v-if="!connected">CONNECT WALLET</b-button>
-              <b-button size="sm" variant="outline-primary" class="ml-4" @click="disconnect();" v-if="connected">DISCONNECT WALLET {{ account.substring(0, 10).toUpperCase() }}</b-button>
+              <b-button size="sm" variant="outline-primary" class="ml-4" @click="disconnect();" v-if="connected">DISCONNECT WALLET {{ account == null ? '' : account.substring(0, 10).toUpperCase() }}</b-button>
             </b-navbar-nav>
           </b-navbar>
         </div>
@@ -103,6 +103,12 @@
                     CryptoPunksMarket: <a :href="'https://etherscan.io/address/'  + getCryptoPunksMarketAddress + '#code'" target="_blank">{{ getCryptoPunksMarketAddress }}</a>
                     <br />
                     CryptoPunksData: <a :href="'https://etherscan.io/address/'  + getCryptoPunksDataAddress + '#code'" target="_blank">{{ getCryptoPunksDataAddress }}</a>
+                  </b-card-text>
+                </b-card>
+
+                <b-card header="Query" style="min-width: 48rem; max-width: 48rem;" class="mb-2">
+                  <b-card-text>
+                    <b-form-input type="text" size="sm" @change="retrieveData('tokenId')" v-model.trim="tokenId" debounce="600" placeholder="🔍 ID1" class="mb-2"></b-form-input>
                   </b-card-text>
                 </b-card>
 
@@ -312,6 +318,9 @@
         data: {
           connected: false,
           account: null,
+
+          tokenId: null,
+
           owners: [],
           status: [],
           tokensOwned: [],
@@ -490,6 +499,19 @@
           }
         },
         methods: {
+          async retrieveData(source) {
+            this.connected = true;
+            console.log(" --- retrieveData(" + source + ") ---");
+            if (!this.connected) {
+              alert("Please click CONNECT WALLET on the top right first");
+            } else {
+              if (!(parseInt(this.tokenId) > 0 && parseInt(this.tokenId) < 10000)) {
+                alert("Please enter tokenId between 0 and 9,999 inclusive");
+              }
+            }
+            // console.log(JSON.stringify(this.getCategories[tokenId]));
+            // return this.getCategories[tokenId];
+          },
           getSortedValuesForCategory(category) {
             console.log(" --- " + category + " ---");
             console.log(JSON.stringify(this.getCategories[category]));
