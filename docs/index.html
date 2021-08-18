@@ -98,12 +98,14 @@
                 <b-card-text>
                   CONNECT WALLET and wait while some web3 calls retrieve the data. View your browser Developer Console for progress.
                 </b-card-text>
-                <b-card-text>
-                  CryptoPunksMarket: <a :href="'https://etherscan.io/address/'  + getCryptoPunksMarketAddress + '#code'" target="_blank">{{ getCryptoPunksMarketAddress }}</a>
-                  <br />
-                  CryptoPunksData: <a :href="'https://etherscan.io/address/'  + getCryptoPunksDataAddress + '#code'" target="_blank">{{ getCryptoPunksDataAddress }}</a>
+                <b-card header="Contracts" style="min-width: 48rem; max-width: 48rem;" class="mb-2">
+                  <b-card-text>
+                    CryptoPunksMarket: <a :href="'https://etherscan.io/address/'  + getCryptoPunksMarketAddress + '#code'" target="_blank">{{ getCryptoPunksMarketAddress }}</a>
+                    <br />
+                    CryptoPunksData: <a :href="'https://etherscan.io/address/'  + getCryptoPunksDataAddress + '#code'" target="_blank">{{ getCryptoPunksDataAddress }}</a>
+                  </b-card-text>
+                </b-card>
 
-                </b-card-text>
                 <!-- <b-card-text>
                   <b-row v-for="(row, rowIndex) in owners.reverse()" v-bind:key="rowIndex" class="m-0 p-0">
                     <b-col v-for="(col, colIndex) in row" v-bind:key="colIndex" class="m-0 p-0">
