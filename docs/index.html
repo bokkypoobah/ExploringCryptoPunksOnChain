@@ -114,7 +114,8 @@
                     punkAttributes: {{ punkAttributes }}
                   </b-card-text>
                   <b-card-text v-if="punkImageSvg != null">
-                    <b-img width="220%" :src="punkImageSvg" />
+                    <!-- <b-img width="220%" :src="punkImageSvg" /> -->
+                    <div id="punkSvg" style="background-color: #648595; width: 240px; height: 240px;"></div>
                   </b-card-text>
                   <b-card-text>
                     punkImageSvg: {{ punkImageSvg }}
@@ -538,6 +539,9 @@
                 console.log(new Date().toUTCString() + " punkImageSvg: " + JSON.stringify(this.punkImageSvg));
                 this.punkAttributes = await new cryptoPunksData.punkAttributes(this.tokenId);
                 console.log(new Date().toUTCString() + " punkAttributes: " + JSON.stringify(this.punkAttributes));
+
+                let svg = this.punkImageSvg.replace("data:image/svg+xml;utf8,", "");
+                document.getElementById('punkSvg').innerHTML = svg;
               }
             }
             // console.log(JSON.stringify(this.getCategories[tokenId]));
