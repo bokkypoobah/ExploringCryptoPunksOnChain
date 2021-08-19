@@ -23,7 +23,10 @@ async function doIt() {
     const block = await provider.getBlockWithTransactions(blockNumber);
     for (const tx of block.transactions) {
       if (tx.from == "0xC352B534e8b987e036A93539Fd6897F53488e56a") {
-        if (tx.data.startsWith("0x6f2a6568")) {
+        if (tx.data.startsWith("0x844e2cd5")) {
+          const info = cryptoPunksData.interface.decodeFunctionData("setPalette", tx.data);
+          console.log(tx.hash + " setPalette: " + info);
+        } else if (tx.data.startsWith("0x6f2a6568")) {
           const info = cryptoPunksData.interface.decodeFunctionData("addComposites", tx.data);
           console.log(tx.hash + " addComposites: " + info);
         } else if (tx.data.startsWith("0xdae2ae20")) {
