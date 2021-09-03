@@ -1,5 +1,5 @@
 /Users/bok/Projects/ExploringCryptoPunksOnChain/scripts
-blockNumber: 13152530
+blockNumber: 13153110
 No owner: 385
 No owner: 387
 No owner: 388
@@ -123,9 +123,6 @@ No owner: 794
 No owner: 795
 No owner: 796
 No owner: 797
-No owner: 798
-No owner: 799
-No owner: 800
 No owner: 803
 No owner: 804
 No owner: 805
@@ -139,7 +136,6 @@ No owner: 815
 No owner: 816
 No owner: 817
 No owner: 818
-No owner: 820
 No owner: 821
 No owner: 822
 No owner: 823
@@ -194,7 +190,6 @@ No owner: 899
 No owner: 903
 No owner: 904
 No owner: 905
-No owner: 906
 No owner: 907
 No owner: 908
 No owner: 914
@@ -1393,14 +1388,12 @@ No owner: 2922
 No owner: 2923
 No owner: 2925
 No owner: 2926
-No owner: 2927
 No owner: 2928
 No owner: 2929
 No owner: 2930
 No owner: 2931
 No owner: 2932
 No owner: 2934
-No owner: 2935
 No owner: 2936
 No owner: 2937
 No owner: 2939
@@ -1707,12 +1700,9 @@ No owner: 3373
 No owner: 3375
 No owner: 3376
 No owner: 3377
-No owner: 3400
-No owner: 3401
 No owner: 3402
 No owner: 3403
 No owner: 3404
-No owner: 3405
 No owner: 3406
 No owner: 3407
 No owner: 3408
@@ -2244,7 +2234,6 @@ No owner: 4149
 No owner: 4150
 No owner: 4151
 No owner: 4154
-No owner: 4155
 No owner: 4157
 No owner: 4158
 No owner: 4159
@@ -2522,16 +2511,13 @@ No owner: 4560
 No owner: 4561
 No owner: 4562
 No owner: 4563
-No owner: 4566
 No owner: 4568
 No owner: 4570
 No owner: 4573
-No owner: 4574
 No owner: 4575
 No owner: 4577
 No owner: 4587
 No owner: 4588
-No owner: 4590
 No owner: 4591
 No owner: 4592
 No owner: 4594
@@ -3612,7 +3598,6 @@ No owner: 6208
 No owner: 6210
 No owner: 6212
 No owner: 6222
-No owner: 6237
 No owner: 6240
 No owner: 6243
 No owner: 6244
@@ -4079,7 +4064,6 @@ No owner: 7024
 No owner: 7028
 No owner: 7029
 No owner: 7030
-No owner: 7031
 No owner: 7032
 No owner: 7033
 No owner: 7034
@@ -4451,7 +4435,6 @@ No owner: 7558
 No owner: 7559
 No owner: 7560
 No owner: 7563
-No owner: 7565
 No owner: 7566
 No owner: 7567
 No owner: 7568
@@ -4605,7 +4588,6 @@ No owner: 7793
 No owner: 7794
 No owner: 7795
 No owner: 7797
-No owner: 7798
 No owner: 7799
 No owner: 7800
 No owner: 7801
@@ -5324,7 +5306,6 @@ No owner: 9033
 No owner: 9034
 No owner: 9035
 No owner: 9036
-No owner: 9037
 No owner: 9040
 No owner: 9041
 No owner: 9043
@@ -5476,7 +5457,6 @@ No owner: 9218
 No owner: 9219
 No owner: 9220
 No owner: 9221
-No owner: 9223
 No owner: 9225
 No owner: 9226
 No owner: 9227
@@ -5551,7 +5531,6 @@ No owner: 9332
 No owner: 9333
 No owner: 9334
 No owner: 9335
-No owner: 9336
 No owner: 9337
 No owner: 9338
 No owner: 9340
@@ -5998,7 +5977,3 @@ No owner: 9973
 No owner: 9974
 No owner: 9975
 No owner: 9976
-No owner: 9978
-No owner: 9979
-No owner: 9980
-No owner: 9981
