@@ -293,7 +293,7 @@ async function doIt() {
     const txType = item[1];
     const tx = await provider.getTransaction(txHash);
     let decodedData = cryptoPunksData.interface.parseTransaction({ data: tx.data, value: tx.value });
-    const key = decodedData.args[0].toString();
+    // console.log(JSON.stringify(decodedData, null, 2));
     const functionName = decodedData.functionFragment.name;
     console.log("Processing " + processing + " of " + TXS.length + " " + txHash + " " + functionName);
     if (functionName == "setPalette") {
@@ -307,7 +307,7 @@ async function doIt() {
     } else if (functionName == "sealContract") {
       data.push({ functionName, data: [] });
     }
-    await delay(1000);
+    await delay(100);
     processing++;
   }
 
