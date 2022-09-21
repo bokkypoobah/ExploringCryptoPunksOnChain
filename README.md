@@ -573,7 +573,7 @@ Saved image to test/generatedimage_3636.svg
 
 ##### Generated Image
 
-<kbd><img src="test/generatedimage_1940.gif" /></kbd>
+<kbd><img src="test/generatedimage_3636.gif" /></kbd>
 
 
 
