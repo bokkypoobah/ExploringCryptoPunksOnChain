@@ -10,15 +10,7 @@ class Data {
     this.accountNames = {};
     this.contracts = [];
 
-    this.gifEncoder = null;
-    this.pixelRenderer = null;
-    this.svgWrapper = null;
-    this.tokenURIBuilder = null;
-    this.cryptoDickbuttsMetadata = null;
-    this.cryptoDickbuttsBuilder = null;
-    this.cryptoDickbuttsStrings = null;
-    this.cryptoDickbuttsRandom = null;
-    this.cryptoDickbuttsChained = null;
+    this.cryptopunksData = null;
 
     this.gasPrice = ethers.utils.parseUnits("10", "gwei");
     this.ethUsd = ethers.utils.parseUnits("1500.00", 18);
@@ -127,41 +119,9 @@ class Data {
     return o;
   }
 
-  async setGIFEncoder(gifEncoder) {
-    this.gifEncoder = gifEncoder;
-    this.addContract(gifEncoder, "GIFEncoder");
-  }
-  async setPixelRenderer(pixelRenderer) {
-    this.pixelRenderer = pixelRenderer;
-    this.addContract(pixelRenderer, "PixelRenderer");
-  }
-  async setSVGWrapper(svgWrapper) {
-    this.svgWrapper = svgWrapper;
-    this.addContract(svgWrapper, "SVGWrapper");
-  }
-  async setTokenURIBuilder(tokenURIBuilder) {
-    this.tokenURIBuilder = tokenURIBuilder;
-    this.addContract(tokenURIBuilder, "TokenURIBuilder");
-  }
-  async setCryptoDickbuttsMetadata(cryptoDickbuttsMetadata) {
-    this.cryptoDickbuttsMetadata = cryptoDickbuttsMetadata;
-    this.addContract(cryptoDickbuttsMetadata, "CryptoDickbuttsMetadata");
-  }
-  async setCryptoDickbuttsBuilder(cryptoDickbuttsBuilder) {
-    this.cryptoDickbuttsBuilder = cryptoDickbuttsBuilder;
-    this.addContract(cryptoDickbuttsBuilder, "CryptoDickbuttsBuilder");
-  }
-  async setCryptoDickbuttsStrings(cryptoDickbuttsStrings) {
-    this.cryptoDickbuttsStrings = cryptoDickbuttsStrings;
-    this.addContract(cryptoDickbuttsStrings, "CryptoDickbuttsStrings");
-  }
-  async setCryptoDickbuttsRandom(cryptoDickbuttsRandom) {
-    this.cryptoDickbuttsRandom = cryptoDickbuttsRandom;
-    this.addContract(cryptoDickbuttsRandom, "CryptoDickbuttsRandom");
-  }
-  async setCryptoDickbuttsChained(cryptoDickbuttsChained) {
-    this.cryptoDickbuttsChained = cryptoDickbuttsChained;
-    this.addContract(cryptoDickbuttsChained, "CryptoDickbuttsChained");
+  async setCryptopunksData(cryptopunksData) {
+    this.cryptopunksData = cryptopunksData;
+    this.addContract(cryptopunksData, "CryptopunksData");
   }
 
   async printState(prefix) {

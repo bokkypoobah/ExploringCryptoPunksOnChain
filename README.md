@@ -11,7 +11,7 @@ See https://bokkypoobah.github.io/ExploringCryptoPunksOnChain/ .
 In [scripts](scripts):
 
 ```
-$ node 02_generateSetupData.js 
+$ node 02_generateSetupData.js
 Processing 0 of 265 0xa92ea3630a13abf3a7322043406df32744c8dc3db1107cf8e244506fba8b284c setPalette
 Processing 1 of 265 0x9ab747363dfc1ff30bb49d658de1b478c58df8f1e4b882816a3192835542c335 addComposites
 Processing 2 of 265 0xbbe44426feae1117f0d8e5b5b11d6d5c765a746b45234b33d433a4aeb6be5166 addComposites
@@ -280,6 +280,300 @@ Processing 264 of 265 0x35f8528199af4b86ddd071138bb6b7c056ce7b1a11a4bbdfb6e057f1
 ```
 
 The transaction setup data for the images can be found in [scripts/setupData.json](scripts/setupData.json). A copy of this file has been made in the [test](test) folder to set up the same data in a dev environment.
+
+<br />
+
+<hr />
+
+### Generating Metadata and Image In This Dev Environment
+
+```
+$ npx hardhat test
+
+
+  ExploringCryptoPunksOnChain
+
+      beforeEach
+        > Deployed CryptopunksData - gasUsed: 1493328 ~ ETH 0.01493328 ~ USD 22
+      beforeEach - end
+
+      00. Test 00 - Generate Metadata & Image
+        > cryptopunksData setup - gasUsed: 386564 ~ ETH 0.00386564 ~ USD 5
+        > cryptopunksData setup - gasUsed: 114110 ~ ETH 0.0011411 ~ USD 1
+        > cryptopunksData setup - gasUsed: 114170 ~ ETH 0.0011417 ~ USD 1
+        > cryptopunksData setup - gasUsed: 114110 ~ ETH 0.0011411 ~ USD 1
+        > cryptopunksData setup - gasUsed: 114146 ~ ETH 0.00114146 ~ USD 1
+        > cryptopunksData setup - gasUsed: 114182 ~ ETH 0.00114182 ~ USD 1
+        > cryptopunksData setup - gasUsed: 114146 ~ ETH 0.00114146 ~ USD 1
+        > cryptopunksData setup - gasUsed: 114050 ~ ETH 0.0011405 ~ USD 1
+        > cryptopunksData setup - gasUsed: 114098 ~ ETH 0.00114098 ~ USD 1
+        > cryptopunksData setup - gasUsed: 114122 ~ ETH 0.00114122 ~ USD 1
+        > cryptopunksData setup - gasUsed: 114146 ~ ETH 0.00114146 ~ USD 1
+        > cryptopunksData setup - gasUsed: 114134 ~ ETH 0.00114134 ~ USD 1
+        > cryptopunksData setup - gasUsed: 114098 ~ ETH 0.00114098 ~ USD 1
+        > cryptopunksData setup - gasUsed: 114038 ~ ETH 0.00114038 ~ USD 1
+        > cryptopunksData setup - gasUsed: 114086 ~ ETH 0.00114086 ~ USD 1
+        > cryptopunksData setup - gasUsed: 114134 ~ ETH 0.00114134 ~ USD 1
+        > cryptopunksData setup - gasUsed: 114110 ~ ETH 0.0011411 ~ USD 1
+        > cryptopunksData setup - gasUsed: 114146 ~ ETH 0.00114146 ~ USD 1
+        > cryptopunksData setup - gasUsed: 114110 ~ ETH 0.0011411 ~ USD 1
+        > cryptopunksData setup - gasUsed: 114146 ~ ETH 0.00114146 ~ USD 1
+        > cryptopunksData setup - gasUsed: 114110 ~ ETH 0.0011411 ~ USD 1
+        > cryptopunksData setup - gasUsed: 114074 ~ ETH 0.00114074 ~ USD 1
+        > cryptopunksData setup - gasUsed: 114074 ~ ETH 0.00114074 ~ USD 1
+        > cryptopunksData setup - gasUsed: 114074 ~ ETH 0.00114074 ~ USD 1
+        > cryptopunksData setup - gasUsed: 114110 ~ ETH 0.0011411 ~ USD 1
+        > cryptopunksData setup - gasUsed: 114122 ~ ETH 0.00114122 ~ USD 1
+        > cryptopunksData setup - gasUsed: 114074 ~ ETH 0.00114074 ~ USD 1
+        > cryptopunksData setup - gasUsed: 114146 ~ ETH 0.00114146 ~ USD 1
+        > cryptopunksData setup - gasUsed: 114098 ~ ETH 0.00114098 ~ USD 1
+        > cryptopunksData setup - gasUsed: 114050 ~ ETH 0.0011405 ~ USD 1
+        > cryptopunksData setup - gasUsed: 94126 ~ ETH 0.00094126 ~ USD 1
+        > cryptopunksData setup - gasUsed: 206171 ~ ETH 0.00206171 ~ USD 3
+        > cryptopunksData setup - gasUsed: 206171 ~ ETH 0.00206171 ~ USD 3
+        > cryptopunksData setup - gasUsed: 206171 ~ ETH 0.00206171 ~ USD 3
+        > cryptopunksData setup - gasUsed: 206171 ~ ETH 0.00206171 ~ USD 3
+        > cryptopunksData setup - gasUsed: 205835 ~ ETH 0.00205835 ~ USD 3
+        > cryptopunksData setup - gasUsed: 205835 ~ ETH 0.00205835 ~ USD 3
+        > cryptopunksData setup - gasUsed: 205835 ~ ETH 0.00205835 ~ USD 3
+        > cryptopunksData setup - gasUsed: 205835 ~ ETH 0.00205835 ~ USD 3
+        > cryptopunksData setup - gasUsed: 228583 ~ ETH 0.00228583 ~ USD 3
+        > cryptopunksData setup - gasUsed: 206171 ~ ETH 0.00206171 ~ USD 3
+        > cryptopunksData setup - gasUsed: 228571 ~ ETH 0.00228571 ~ USD 3
+        > cryptopunksData setup - gasUsed: 70577 ~ ETH 0.00070577 ~ USD 1
+        > cryptopunksData setup - gasUsed: 115479 ~ ETH 0.00115479 ~ USD 1
+        > cryptopunksData setup - gasUsed: 138155 ~ ETH 0.00138155 ~ USD 2
+        > cryptopunksData setup - gasUsed: 70589 ~ ETH 0.00070589 ~ USD 1
+        > cryptopunksData setup - gasUsed: 138311 ~ ETH 0.00138311 ~ USD 2
+        > cryptopunksData setup - gasUsed: 70469 ~ ETH 0.00070469 ~ USD 1
+        > cryptopunksData setup - gasUsed: 70421 ~ ETH 0.00070421 ~ USD 1
+        > cryptopunksData setup - gasUsed: 115251 ~ ETH 0.00115251 ~ USD 1
+        > cryptopunksData setup - gasUsed: 115251 ~ ETH 0.00115251 ~ USD 1
+        > cryptopunksData setup - gasUsed: 115203 ~ ETH 0.00115203 ~ USD 1
+        > cryptopunksData setup - gasUsed: 115503 ~ ETH 0.00115503 ~ USD 1
+        > cryptopunksData setup - gasUsed: 115527 ~ ETH 0.00115527 ~ USD 1
+        > cryptopunksData setup - gasUsed: 70349 ~ ETH 0.00070349 ~ USD 1
+        > cryptopunksData setup - gasUsed: 115587 ~ ETH 0.00115587 ~ USD 1
+        > cryptopunksData setup - gasUsed: 70445 ~ ETH 0.00070445 ~ USD 1
+        > cryptopunksData setup - gasUsed: 70349 ~ ETH 0.00070349 ~ USD 1
+        > cryptopunksData setup - gasUsed: 138323 ~ ETH 0.00138323 ~ USD 2
+        > cryptopunksData setup - gasUsed: 70625 ~ ETH 0.00070625 ~ USD 1
+        > cryptopunksData setup - gasUsed: 70757 ~ ETH 0.00070757 ~ USD 1
+        > cryptopunksData setup - gasUsed: 115275 ~ ETH 0.00115275 ~ USD 1
+        > cryptopunksData setup - gasUsed: 70601 ~ ETH 0.00070601 ~ USD 1
+        > cryptopunksData setup - gasUsed: 70481 ~ ETH 0.00070481 ~ USD 1
+        > cryptopunksData setup - gasUsed: 70349 ~ ETH 0.00070349 ~ USD 1
+        > cryptopunksData setup - gasUsed: 137867 ~ ETH 0.00137867 ~ USD 2
+        > cryptopunksData setup - gasUsed: 70601 ~ ETH 0.00070601 ~ USD 1
+        > cryptopunksData setup - gasUsed: 138119 ~ ETH 0.00138119 ~ USD 2
+        > cryptopunksData setup - gasUsed: 115563 ~ ETH 0.00115563 ~ USD 1
+        > cryptopunksData setup - gasUsed: 70781 ~ ETH 0.00070781 ~ USD 1
+        > cryptopunksData setup - gasUsed: 115371 ~ ETH 0.00115371 ~ USD 1
+        > cryptopunksData setup - gasUsed: 115599 ~ ETH 0.00115599 ~ USD 1
+        > cryptopunksData setup - gasUsed: 115455 ~ ETH 0.00115455 ~ USD 1
+        > cryptopunksData setup - gasUsed: 137915 ~ ETH 0.00137915 ~ USD 2
+        > cryptopunksData setup - gasUsed: 70541 ~ ETH 0.00070541 ~ USD 1
+        > cryptopunksData setup - gasUsed: 160495 ~ ETH 0.00160495 ~ USD 2
+        > cryptopunksData setup - gasUsed: 137999 ~ ETH 0.00137999 ~ USD 2
+        > cryptopunksData setup - gasUsed: 138095 ~ ETH 0.00138095 ~ USD 2
+        > cryptopunksData setup - gasUsed: 70601 ~ ETH 0.00070601 ~ USD 1
+        > cryptopunksData setup - gasUsed: 137939 ~ ETH 0.00137939 ~ USD 2
+        > cryptopunksData setup - gasUsed: 138311 ~ ETH 0.00138311 ~ USD 2
+        > cryptopunksData setup - gasUsed: 138143 ~ ETH 0.00138143 ~ USD 2
+        > cryptopunksData setup - gasUsed: 70457 ~ ETH 0.00070457 ~ USD 1
+        > cryptopunksData setup - gasUsed: 115275 ~ ETH 0.00115275 ~ USD 1
+        > cryptopunksData setup - gasUsed: 70733 ~ ETH 0.00070733 ~ USD 1
+        > cryptopunksData setup - gasUsed: 70613 ~ ETH 0.00070613 ~ USD 1
+        > cryptopunksData setup - gasUsed: 138035 ~ ETH 0.00138035 ~ USD 2
+        > cryptopunksData setup - gasUsed: 70649 ~ ETH 0.00070649 ~ USD 1
+        > cryptopunksData setup - gasUsed: 115299 ~ ETH 0.00115299 ~ USD 1
+        > cryptopunksData setup - gasUsed: 115287 ~ ETH 0.00115287 ~ USD 1
+        > cryptopunksData setup - gasUsed: 137927 ~ ETH 0.00137927 ~ USD 2
+        > cryptopunksData setup - gasUsed: 70385 ~ ETH 0.00070385 ~ USD 1
+        > cryptopunksData setup - gasUsed: 70817 ~ ETH 0.00070817 ~ USD 1
+        > cryptopunksData setup - gasUsed: 70721 ~ ETH 0.00070721 ~ USD 1
+        > cryptopunksData setup - gasUsed: 115479 ~ ETH 0.00115479 ~ USD 1
+        > cryptopunksData setup - gasUsed: 115395 ~ ETH 0.00115395 ~ USD 1
+        > cryptopunksData setup - gasUsed: 70793 ~ ETH 0.00070793 ~ USD 1
+        > cryptopunksData setup - gasUsed: 205955 ~ ETH 0.00205955 ~ USD 3
+        > cryptopunksData setup - gasUsed: 70493 ~ ETH 0.00070493 ~ USD 1
+        > cryptopunksData setup - gasUsed: 70613 ~ ETH 0.00070613 ~ USD 1
+        > cryptopunksData setup - gasUsed: 70577 ~ ETH 0.00070577 ~ USD 1
+        > cryptopunksData setup - gasUsed: 115179 ~ ETH 0.00115179 ~ USD 1
+        > cryptopunksData setup - gasUsed: 115575 ~ ETH 0.00115575 ~ USD 1
+        > cryptopunksData setup - gasUsed: 70769 ~ ETH 0.00070769 ~ USD 1
+        > cryptopunksData setup - gasUsed: 70649 ~ ETH 0.00070649 ~ USD 1
+        > cryptopunksData setup - gasUsed: 138323 ~ ETH 0.00138323 ~ USD 2
+        > cryptopunksData setup - gasUsed: 183423 ~ ETH 0.00183423 ~ USD 2
+        > cryptopunksData setup - gasUsed: 70481 ~ ETH 0.00070481 ~ USD 1
+        > cryptopunksData setup - gasUsed: 70553 ~ ETH 0.00070553 ~ USD 1
+        > cryptopunksData setup - gasUsed: 160459 ~ ETH 0.00160459 ~ USD 2
+        > cryptopunksData setup - gasUsed: 70409 ~ ETH 0.00070409 ~ USD 1
+        > cryptopunksData setup - gasUsed: 160831 ~ ETH 0.00160831 ~ USD 2
+        > cryptopunksData setup - gasUsed: 115203 ~ ETH 0.00115203 ~ USD 1
+        > cryptopunksData setup - gasUsed: 183627 ~ ETH 0.00183627 ~ USD 2
+        > cryptopunksData setup - gasUsed: 115575 ~ ETH 0.00115575 ~ USD 1
+        > cryptopunksData setup - gasUsed: 70349 ~ ETH 0.00070349 ~ USD 1
+        > cryptopunksData setup - gasUsed: 160963 ~ ETH 0.00160963 ~ USD 2
+        > cryptopunksData setup - gasUsed: 70577 ~ ETH 0.00070577 ~ USD 1
+        > cryptopunksData setup - gasUsed: 160471 ~ ETH 0.00160471 ~ USD 2
+        > cryptopunksData setup - gasUsed: 115287 ~ ETH 0.00115287 ~ USD 1
+        > cryptopunksData setup - gasUsed: 70577 ~ ETH 0.00070577 ~ USD 1
+        > cryptopunksData setup - gasUsed: 138251 ~ ETH 0.00138251 ~ USD 2
+        > cryptopunksData setup - gasUsed: 70529 ~ ETH 0.00070529 ~ USD 1
+        > cryptopunksData setup - gasUsed: 115395 ~ ETH 0.00115395 ~ USD 1
+        > cryptopunksData setup - gasUsed: 70769 ~ ETH 0.00070769 ~ USD 1
+        > cryptopunksData setup - gasUsed: 115479 ~ ETH 0.00115479 ~ USD 1
+        > cryptopunksData setup - gasUsed: 205403 ~ ETH 0.00205403 ~ USD 3
+        > cryptopunksData setup - gasUsed: 70577 ~ ETH 0.00070577 ~ USD 1
+        > cryptopunksData setup - gasUsed: 70601 ~ ETH 0.00070601 ~ USD 1
+        > cryptopunksData setup - gasUsed: 160351 ~ ETH 0.00160351 ~ USD 2
+        > cryptopunksData setup - gasUsed: 70589 ~ ETH 0.00070589 ~ USD 1
+        > cryptopunksData setup - gasUsed: 138011 ~ ETH 0.00138011 ~ USD 2
+        > cryptopunksData setup - gasUsed: 115419 ~ ETH 0.00115419 ~ USD 1
+        > cryptopunksData setup - gasUsed: 115323 ~ ETH 0.00115323 ~ USD 1
+        > cryptopunksData setup - gasUsed: 160975 ~ ETH 0.00160975 ~ USD 2
+        > cryptopunksData setup - gasUsed: 115491 ~ ETH 0.00115491 ~ USD 1
+        > cryptopunksData setup - gasUsed: 115563 ~ ETH 0.00115563 ~ USD 1
+        > cryptopunksData setup - gasUsed: 138275 ~ ETH 0.00138275 ~ USD 2
+        > cryptopunksData setup - gasUsed: 70517 ~ ETH 0.00070517 ~ USD 1
+        > cryptopunksData setup - gasUsed: 70457 ~ ETH 0.00070457 ~ USD 1
+        > cryptopunksData setup - gasUsed: 160459 ~ ETH 0.00160459 ~ USD 2
+        > cryptopunksData setup - gasUsed: 137963 ~ ETH 0.00137963 ~ USD 2
+        > cryptopunksData setup - gasUsed: 160879 ~ ETH 0.00160879 ~ USD 2
+        > cryptopunksData setup - gasUsed: 115587 ~ ETH 0.00115587 ~ USD 1
+        > cryptopunksData setup - gasUsed: 70781 ~ ETH 0.00070781 ~ USD 1
+        > cryptopunksData setup - gasUsed: 115251 ~ ETH 0.00115251 ~ USD 1
+        > cryptopunksData setup - gasUsed: 138119 ~ ETH 0.00138119 ~ USD 2
+        > cryptopunksData setup - gasUsed: 70601 ~ ETH 0.00070601 ~ USD 1
+        > cryptopunksData setup - gasUsed: 70457 ~ ETH 0.00070457 ~ USD 1
+        > cryptopunksData setup - gasUsed: 137915 ~ ETH 0.00137915 ~ USD 2
+        > cryptopunksData setup - gasUsed: 70601 ~ ETH 0.00070601 ~ USD 1
+        > cryptopunksData setup - gasUsed: 160771 ~ ETH 0.00160771 ~ USD 2
+        > cryptopunksData setup - gasUsed: 160795 ~ ETH 0.00160795 ~ USD 2
+        > cryptopunksData setup - gasUsed: 70637 ~ ETH 0.00070637 ~ USD 1
+        > cryptopunksData setup - gasUsed: 137867 ~ ETH 0.00137867 ~ USD 2
+        > cryptopunksData setup - gasUsed: 70409 ~ ETH 0.00070409 ~ USD 1
+        > cryptopunksData setup - gasUsed: 70565 ~ ETH 0.00070565 ~ USD 1
+        > cryptopunksData setup - gasUsed: 160831 ~ ETH 0.00160831 ~ USD 2
+        > cryptopunksData setup - gasUsed: 70505 ~ ETH 0.00070505 ~ USD 1
+        > cryptopunksData setup - gasUsed: 137855 ~ ETH 0.00137855 ~ USD 2
+        > cryptopunksData setup - gasUsed: 70613 ~ ETH 0.00070613 ~ USD 1
+        > cryptopunksData setup - gasUsed: 70481 ~ ETH 0.00070481 ~ USD 1
+        > cryptopunksData setup - gasUsed: 115467 ~ ETH 0.00115467 ~ USD 1
+        > cryptopunksData setup - gasUsed: 70481 ~ ETH 0.00070481 ~ USD 1
+        > cryptopunksData setup - gasUsed: 608330 ~ ETH 0.0060833 ~ USD 9
+        > cryptopunksData setup - gasUsed: 608366 ~ ETH 0.00608366 ~ USD 9
+        > cryptopunksData setup - gasUsed: 608282 ~ ETH 0.00608282 ~ USD 9
+        > cryptopunksData setup - gasUsed: 608354 ~ ETH 0.00608354 ~ USD 9
+        > cryptopunksData setup - gasUsed: 608474 ~ ETH 0.00608474 ~ USD 9
+        > cryptopunksData setup - gasUsed: 608330 ~ ETH 0.0060833 ~ USD 9
+        > cryptopunksData setup - gasUsed: 608702 ~ ETH 0.00608702 ~ USD 9
+        > cryptopunksData setup - gasUsed: 608642 ~ ETH 0.00608642 ~ USD 9
+        > cryptopunksData setup - gasUsed: 608558 ~ ETH 0.00608558 ~ USD 9
+        > cryptopunksData setup - gasUsed: 608702 ~ ETH 0.00608702 ~ USD 9
+        > cryptopunksData setup - gasUsed: 608498 ~ ETH 0.00608498 ~ USD 9
+        > cryptopunksData setup - gasUsed: 608714 ~ ETH 0.00608714 ~ USD 9
+        > cryptopunksData setup - gasUsed: 608750 ~ ETH 0.0060875 ~ USD 9
+        > cryptopunksData setup - gasUsed: 608762 ~ ETH 0.00608762 ~ USD 9
+        > cryptopunksData setup - gasUsed: 608834 ~ ETH 0.00608834 ~ USD 9
+        > cryptopunksData setup - gasUsed: 608618 ~ ETH 0.00608618 ~ USD 9
+        > cryptopunksData setup - gasUsed: 608822 ~ ETH 0.00608822 ~ USD 9
+        > cryptopunksData setup - gasUsed: 608666 ~ ETH 0.00608666 ~ USD 9
+        > cryptopunksData setup - gasUsed: 608762 ~ ETH 0.00608762 ~ USD 9
+        > cryptopunksData setup - gasUsed: 608726 ~ ETH 0.00608726 ~ USD 9
+        > cryptopunksData setup - gasUsed: 608810 ~ ETH 0.0060881 ~ USD 9
+        > cryptopunksData setup - gasUsed: 608942 ~ ETH 0.00608942 ~ USD 9
+        > cryptopunksData setup - gasUsed: 608810 ~ ETH 0.0060881 ~ USD 9
+        > cryptopunksData setup - gasUsed: 608810 ~ ETH 0.0060881 ~ USD 9
+        > cryptopunksData setup - gasUsed: 608846 ~ ETH 0.00608846 ~ USD 9
+        > cryptopunksData setup - gasUsed: 608774 ~ ETH 0.00608774 ~ USD 9
+        > cryptopunksData setup - gasUsed: 608930 ~ ETH 0.0060893 ~ USD 9
+        > cryptopunksData setup - gasUsed: 608978 ~ ETH 0.00608978 ~ USD 9
+        > cryptopunksData setup - gasUsed: 608798 ~ ETH 0.00608798 ~ USD 9
+        > cryptopunksData setup - gasUsed: 608834 ~ ETH 0.00608834 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609002 ~ ETH 0.00609002 ~ USD 9
+        > cryptopunksData setup - gasUsed: 608858 ~ ETH 0.00608858 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609026 ~ ETH 0.00609026 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609002 ~ ETH 0.00609002 ~ USD 9
+        > cryptopunksData setup - gasUsed: 608978 ~ ETH 0.00608978 ~ USD 9
+        > cryptopunksData setup - gasUsed: 608870 ~ ETH 0.0060887 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609050 ~ ETH 0.0060905 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609050 ~ ETH 0.0060905 ~ USD 9
+        > cryptopunksData setup - gasUsed: 608954 ~ ETH 0.00608954 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609074 ~ ETH 0.00609074 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609050 ~ ETH 0.0060905 ~ USD 9
+        > cryptopunksData setup - gasUsed: 608786 ~ ETH 0.00608786 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609110 ~ ETH 0.0060911 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609014 ~ ETH 0.00609014 ~ USD 9
+        > cryptopunksData setup - gasUsed: 608918 ~ ETH 0.00608918 ~ USD 9
+        > cryptopunksData setup - gasUsed: 608906 ~ ETH 0.00608906 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609026 ~ ETH 0.00609026 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609050 ~ ETH 0.0060905 ~ USD 9
+        > cryptopunksData setup - gasUsed: 608930 ~ ETH 0.0060893 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609014 ~ ETH 0.00609014 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609230 ~ ETH 0.0060923 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609110 ~ ETH 0.0060911 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609098 ~ ETH 0.00609098 ~ USD 9
+        > cryptopunksData setup - gasUsed: 608930 ~ ETH 0.0060893 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609062 ~ ETH 0.00609062 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609002 ~ ETH 0.00609002 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609122 ~ ETH 0.00609122 ~ USD 9
+        > cryptopunksData setup - gasUsed: 608942 ~ ETH 0.00608942 ~ USD 9
+        > cryptopunksData setup - gasUsed: 608966 ~ ETH 0.00608966 ~ USD 9
+        > cryptopunksData setup - gasUsed: 608882 ~ ETH 0.00608882 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609158 ~ ETH 0.00609158 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609098 ~ ETH 0.00609098 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609182 ~ ETH 0.00609182 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609182 ~ ETH 0.00609182 ~ USD 9
+        > cryptopunksData setup - gasUsed: 608906 ~ ETH 0.00608906 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609002 ~ ETH 0.00609002 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609074 ~ ETH 0.00609074 ~ USD 9
+        > cryptopunksData setup - gasUsed: 608966 ~ ETH 0.00608966 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609050 ~ ETH 0.0060905 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609098 ~ ETH 0.00609098 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609014 ~ ETH 0.00609014 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609194 ~ ETH 0.00609194 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609266 ~ ETH 0.00609266 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609194 ~ ETH 0.00609194 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609086 ~ ETH 0.00609086 ~ USD 9
+        > cryptopunksData setup - gasUsed: 608990 ~ ETH 0.0060899 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609230 ~ ETH 0.0060923 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609182 ~ ETH 0.00609182 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609110 ~ ETH 0.0060911 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609290 ~ ETH 0.0060929 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609314 ~ ETH 0.00609314 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609182 ~ ETH 0.00609182 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609170 ~ ETH 0.0060917 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609158 ~ ETH 0.00609158 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609170 ~ ETH 0.0060917 ~ USD 9
+        > cryptopunksData setup - gasUsed: 608966 ~ ETH 0.00608966 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609122 ~ ETH 0.00609122 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609254 ~ ETH 0.00609254 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609290 ~ ETH 0.0060929 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609170 ~ ETH 0.0060917 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609398 ~ ETH 0.00609398 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609206 ~ ETH 0.00609206 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609230 ~ ETH 0.0060923 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609278 ~ ETH 0.00609278 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609254 ~ ETH 0.00609254 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609338 ~ ETH 0.00609338 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609182 ~ ETH 0.00609182 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609230 ~ ETH 0.0060923 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609206 ~ ETH 0.00609206 ~ USD 9
+        > cryptopunksData setup - gasUsed: 609230 ~ ETH 0.0060923 ~ USD 9
+        > cryptopunksData setup - gasUsed: 26572 ~ ETH 0.00026572 ~ USD 0
+3636 "Zombie, Front Beard Dark, Earring, Top Hat"
+    ✔ 00. Test 00 (12478ms)
+
+Saved image to test/generatedimage_3636.svg
+
+  1 passing (15s)
+```
+
+##### Generated Image
+
+<kbd><img src="test/generatedimage_1940.gif" /></kbd>
 
 
 
